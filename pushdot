@@ -1,2 +1,0 @@
-#!/bin/bash
-cp -afRv ~/.bashrc ~/.vimrc ~/.vim ~/.Xresources ~/pulldot ~/pushdot ~/Desktop/git/dotfiles

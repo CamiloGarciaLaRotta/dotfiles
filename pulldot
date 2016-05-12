@@ -1,4 +1,0 @@
-#!/bin/bash
-GIT="~/Desktop/git/dotfiles/"
-cp -afRv "$GIT".bashrc "$GIT".vimrc "$GIT".Xresources "$GIT".vim "$GIT"pushdot "$GIT"pulldot ~
-source ~/.bashrc
