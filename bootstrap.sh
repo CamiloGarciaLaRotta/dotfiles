@@ -11,11 +11,11 @@ curl -L "https://bintray.com/user/downloadSubjectPublicKey?username=bintray" -o 
 echo "deb http://packages.linuxmint.com debian import" | sudo tee -a /etc/apt/sources.list
 
 ## apps to install
-APPS = "vim linux-headers-$(uname -r) dkms build-essential pkg-config python-pip xorg i3 
+APPS = "vim dkms build-essential pkg-config python-pip xorg i3 
 				feh xfce4-terminal firefox neofetch" 
 
 sudo apt-get update && sudo apt-get install -y $APPS
-pip-install tldr
+sudo pip install tldr
 
 ### sync dotfiles
 rsync ascii background.png ~/Pictures/
