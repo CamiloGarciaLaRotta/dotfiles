@@ -3,22 +3,38 @@
 ### install features
 
 ## repos to be added
+echo adding repositories for neofetch and firefox
+
 # neofetch
-echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | sudo tee -a /etc/apt/sources.list
+echo -e "\ndeb http://dl.bintray.com/dawidd6/neofetch jessie main" | sudo tee -a /etc/apt/sources.list
 curl -L "https://bintray.com/user/downloadSubjectPublicKey?username=bintray" -o Release-neofetch.key && sudo apt-key add Release-neofetch.key && rm Release-neofetch.key
 
 # firefox
-echo "deb http://packages.linuxmint.com debian import" | sudo tee -a /etc/apt/sources.list
+echo -e "\ndeb http://packages.linuxmint.com debian import" | sudo tee -a /etc/apt/sources.list
 
 ## apps to install
-APPS = "vim dkms build-essential pkg-config python-pip xorg i3 
-				feh xfce4-terminal firefox neofetch" 
+echo updating and installing packages
 
-sudo apt-get update && sudo apt-get install -y $APPS
+APPS="dkms build-essential pkg-config python-pip xorg i3 feh xfce4-terminal neofetch firefox" 
+
+sudo apt-get update 
+sudo apt-get install -y --force-yes $APPS
 sudo pip install tldr
 
 ### sync dotfiles
-rsync ascii background.png ~/Pictures/
-rsync -a .* ~
+echo moving dotfiles
+
+cp ~/dotfiles/ascii ~/dotfiles/background.png ~/Pictures/
+cp -r ~/dotfiles/dots/.* ~
 
 source ~/.bashrc
+
+echo deleting unwanted default folders
+rmdir ~/Public ~/Music ~/Videos ~/Templates
+
+read -p "Do you wish to restart VM ?" yn
+case $yn in
+	[Yy]* ) sudo reboot;
+	* ) exit;
+esac
+
