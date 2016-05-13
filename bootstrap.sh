@@ -24,17 +24,12 @@ sudo pip install tldr
 ### sync dotfiles
 echo moving dotfiles
 
-cp ~/dotfiles/ascii ~/dotfiles/background.png ~/Pictures/
-cp -r ~/dotfiles/dots/.* ~
+rsync -a ~/dotfiles/ascii ~/dotfiles/background.png ~/Pictures/
+cp -r ~/dotfiles/dots/.*[a-zA-Z]* ~
 
 source ~/.bashrc
 
 echo deleting unwanted default folders
-rmdir ~/Public ~/Music ~/Videos ~/Templates
+rm -rf ~/Public ~/Music ~/Videos ~/Templates
 
-read -p "Do you wish to restart VM ?" yn
-case $yn in
-	[Yy]* ) sudo reboot;
-	* ) exit;
-esac
-
+rm "$0"
