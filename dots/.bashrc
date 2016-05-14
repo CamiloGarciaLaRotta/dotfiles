@@ -40,8 +40,7 @@ case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
 
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-PS1="\e[2;33;49m\u@\h \W \\$ \[$(tput sgr0)\]\e[0m"
+PS1="\[\033[38;5;3m\]\u@\h \W \\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
 
 unset color_prompt force_color_prompt
 
