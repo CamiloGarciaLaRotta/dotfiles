@@ -16,9 +16,12 @@ set incsearch
 set magic
 
 " indentation
+set expandtab
+set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 set foldcolumn=1
+filetype plugin indent on
 set ai
 set si
 set wrap
