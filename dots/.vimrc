@@ -7,6 +7,8 @@ set clipboard=unnamedplus
 set backspace=eol,start,indent
 set showmatch
 set mat=2
+set cursorline
+set relativenumber
 
 " search
 set ignorecase

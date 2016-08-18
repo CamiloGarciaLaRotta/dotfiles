@@ -300,7 +300,7 @@ if exists("syntax_on")
 									    exe "hi! FoldColumn"    .s:fg_none        .s:bg_darkcolumn  .s:fmt_none
 									    exe "hi! SignColumn"    .s:fg_none        .s:bg_darkcolumn  .s:fmt_none
 									    "   Incsearch"
-									    exe "hi! LineNr"        .s:fg_selection   .s:bg_none        .s:fmt_none
+									    exe "hi! LineNr"        .s:fg_green  .s:bg_none        .s:fmt_none
 									    exe "hi! CursorLineNr"  .s:fg_yellow      .s:bg_none        .s:fmt_none
 									    exe "hi! MatchParen"    .s:fg_background  .s:bg_changebg    .s:fmt_none
 									    exe "hi! ModeMsg"       .s:fg_green       .s:bg_none        .s:fmt_none
