@@ -17,6 +17,9 @@ echo updating and installing packages
 
 APPS="dkms build-essential pkg-config python-pip xorg i3 feh xfce4-terminal neofetch firefox" 
 
+git config --global user.name "Camilo Garcia La Rotta"
+git config --global user.email camilo.garcia.larotta@gmail.com
+
 sudo apt-get update 
 sudo apt-get install -y --force-yes $APPS
 sudo pip install tldr
