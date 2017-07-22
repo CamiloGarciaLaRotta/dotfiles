@@ -1,16 +1,16 @@
 " general
 syntax on
-set ruler
-set number
-set wildmenu
-set clipboard=unnamedplus
-set backspace=eol,start,indent
-set showmatch
-set mat=2
-set cursorline
-set relativenumber
+set ruler			" current row,col at bottom of editor
+set number			
+set wildmenu			" useful command autocomplete menu <TAB> 
+set clipboard=unnamedplus	
+set backspace=eol,start,indent	
+set showmatch			
+set mat=2			" cursor blink rate
+set cursorline	
 
-" search
+" search 
+set sel=inclusive
 set ignorecase
 set smartcase
 set hlsearch
@@ -19,10 +19,9 @@ set magic
 
 " indentation
 set expandtab
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
-set foldcolumn=1
+set shiftwidth=4
+set tabstop=8
+set softtabstop=4
 filetype plugin indent on
 set ai
 set si
@@ -35,7 +34,5 @@ set t_vb=
 set tm=500
 
 " theme
-set t_Co=256
-set background=dark
-let g:hybrid_reduced_contrast = 1
-colorscheme hybrid
+color slate 
+
