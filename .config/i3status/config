@@ -1,0 +1,59 @@
+general {
+        colors = true
+        interval = 5
+          color_good = "#36E592"
+  color_degraded = "#CE9726"
+  color_bad = "#CE4B4F"
+  color_separator = "#B3BEFF"
+  interval = 5
+}
+order += "cpu_temperature 0"
+order += "volume master"
+order += "load"
+order += "disk /"
+order += "wireless _first_"
+order += "battery 0"
+order += "tztime local"
+
+wireless _first_ {
+        format_up = " %essid %quality %bitrate %ip "
+        format_down = " WiFi down "
+}
+ 
+volume master {
+        format = " ♫ %volume "
+        format_muted = " ♫ (%volume) "
+        device = "pulse:1"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+battery 0 {
+        format = " %status %percentage "
+        status_chr = "⚡Charging "
+        status_bat = "⚡"
+        status_full = "⚡"
+        low_threshold = 30
+        threshold_type = percentage
+        integer_battery_capacity = true
+        color_good = "#0000FF"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+}
+
+load {
+        format = " Load %5min "
+}
+
+tztime local {
+        format = " %h %d %I:%M:%S "
+}
+
+cpu_temperature 0 {
+        format = " ☸ %degrees °C "
+        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
+        max_threshold = "55"
+}
+
+disk "/" {
+        format = " ⛁  %avail "
+}

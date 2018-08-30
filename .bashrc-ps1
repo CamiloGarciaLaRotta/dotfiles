@@ -1,0 +1,92 @@
+#! /bin/bash
+
+git_prompt_file="${HOME}/.git-prompt.sh"
+if [[ -f "${git_prompt_file}" || -L "${git_prompt_file}" ]]; then
+    source "${git_prompt_file}"
+    PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+    GIT_PS1_SHOWDIRTYSTATE=true
+    GIT_PS1_SHOWCOLORHINTS=true
+    GIT_PS1_SHOWSTASHSTATE=true
+    # GIT_PS1_SHOWUPSTREAM=auto
+    GIT_PROMPT_COMMAND="${PROMPT_COMMAND}"
+fi
+
+# http://superuser.com/questions/301353/escape-non-printing-characters-in-a-function-for-a-bash-prompt
+function _c_black   { echo -en "\001\e[1;30m\002"; }
+function _c_blue    { echo -en "\001\e[1;34m\002"; }
+function _c_purple  { echo -en "\001\e[1;35m\002"; }
+function _c_red     { echo -en "\001\e[1;31m\002"; }
+function _c_green   { echo -en "\001\e[1;32m\002"; }
+function _c_yellow  { echo -en "\001\e[1;33m\002"; }
+function _c_cyan    { echo -en "\001\e[1;36m\002"; }
+function _c_white   { echo -en "\001\e[1;37m\002"; }
+function _c_reset   { echo -en "\001\e[0m\002"; }
+
+function _c_black_bg { echo -en "\001\e[40m\002"; }
+
+function _c_last_command
+{
+    if [[ "${LAST_COMMAND_RESULT}" == "0" ]]; then
+        echo -n
+    else
+        _c_red
+        echo -n "${LAST_COMMAND_RESULT} "
+    fi
+}
+
+function _c_username
+{
+    if [[ "$(whoami)" == "eerinea" ]]; then
+    return 0
+    fi
+
+    if [[ $(id -u) == "0" ]]; then
+        _c_yellow
+    else
+        _c_cyan
+    fi
+    echo -n "$(whoami) "
+}
+
+function _c_hostname
+{
+    if [ -n "$SSH_TTY" ]; then
+        _c_red
+        echo -n "$(hostname | cut -d"." -f1) "
+    else
+        _c_cyan
+        _c_black_bg
+        echo -en "laptop"
+        _c_reset
+    fi
+}
+
+function _c_pwd
+{
+    _c_cyan
+    if [[ "$PWD" == "$HOME" ]]; then
+        echo -n "~"
+    else
+        echo -n "${PWD##*/}"
+    fi
+}
+
+function _make_ps1
+{
+    _c_last_command
+
+    #_c_hostname
+    _c_reset
+    #echo -n " "
+    _c_username
+    _c_pwd
+
+    _c_purple
+    __git_ps1 " %s" | sed "s/master/./" | sed "s/. //"
+    echo -n " "
+
+    _c_reset
+}
+
+PROMPT_COMMAND='LAST_COMMAND_RESULT=$?'
+PS1='$(_make_ps1)'

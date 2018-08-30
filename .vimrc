@@ -1,12 +1,12 @@
 " general
 syntax on
-set ruler			" current row,col at bottom of editor
+set ruler			
 set number			
-set wildmenu			" useful command autocomplete menu <TAB> 
+set wildmenu			 
 set clipboard=unnamedplus	
 set backspace=eol,start,indent	
 set showmatch			
-set mat=2			" cursor blink rate
+set mat=2			
 set cursorline	
 
 " search 
@@ -19,9 +19,9 @@ set magic
 
 " indentation
 set expandtab
-set shiftwidth=4
-set tabstop=8
-set softtabstop=4
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 filetype plugin indent on
 set ai
 set si
