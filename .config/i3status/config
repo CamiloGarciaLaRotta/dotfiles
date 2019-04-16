@@ -1,59 +1,62 @@
 general {
-        colors = true
-        interval = 5
-          color_good = "#36E592"
-  color_degraded = "#CE9726"
-  color_bad = "#CE4B4F"
-  color_separator = "#B3BEFF"
-  interval = 5
+	separator = ""
+	output_format = "i3bar"
+	colors = false
+	markup = pango
+	interval = 5
+	color_good = '#2f343f'
+	color_degraded = '#ebcb8b'
+	color_bad = '#ba5e57'
 }
-order += "cpu_temperature 0"
-order += "volume master"
+
 order += "load"
+order += "cpu_temperature 0"
 order += "disk /"
+order += "volume master"
 order += "wireless _first_"
 order += "battery 0"
 order += "tztime local"
 
-wireless _first_ {
-        format_up = " %essid %quality %bitrate %ip "
-        format_down = " WiFi down "
-}
- 
-volume master {
-        format = " ♫ %volume "
-        format_muted = " ♫ (%volume) "
-        device = "pulse:1"
-        mixer = "Master"
-        mixer_idx = 0
-}
-
-battery 0 {
-        format = " %status %percentage "
-        status_chr = "⚡Charging "
-        status_bat = "⚡"
-        status_full = "⚡"
-        low_threshold = 30
-        threshold_type = percentage
-        integer_battery_capacity = true
-        color_good = "#0000FF"
-        path = "/sys/class/power_supply/BAT%d/uevent"
-}
-
 load {
-        format = " Load %5min "
-}
-
-tztime local {
-        format = " %h %d %I:%M:%S "
+	format = "<span background='#bd93f9'>  %5min Load </span>"
 }
 
 cpu_temperature 0 {
-        format = " ☸ %degrees °C "
-        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
-        max_threshold = "55"
+	format = "<span background='#8ca4ea'>  %degrees °C </span>"
+	path = "/sys/class/thermal/thermal_zone0/temp"
+	# path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
+	max_threshold = "55"
 }
 
 disk "/" {
-        format = " ⛁  %avail "
+	format = "<span background='#fec7cd'>  %avail Free </span>"
 }
+
+volume master {
+	format = "<span background='#8be9fb'>  %volume </span>"
+	format_muted = "<span background='#8be9fb'>  Muted </span>"
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
+
+wireless _first_ {
+	format_up = "<span background='#0aaeff'>  %essid %ip </span>"
+	format_down = "<span background='#0aaeff'>  Disconnected </span>"
+}
+
+battery 0 {
+	format = "<span background='#50fa7b'> %status %percentage </span>"
+	format_down = " No Battery"
+	status_chr = " Charging"
+	status_bat = " "
+	status_full = " Charged"
+	path = "/sys/class/power_supply/BAT%d/uevent"
+	low_threshold = 30
+}
+
+tztime local {
+	format = "<span background='#f1fa8c'> %time </span>"
+	format_time = " %-d %b %I:%M"
+}
+
