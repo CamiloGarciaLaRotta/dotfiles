@@ -1,17 +1,17 @@
 general {
 	separator = ""
 	output_format = "i3bar"
-	colors = false
+	colors = true
 	markup = pango
 	interval = 5
-	color_good = '#2f343f'
-	color_degraded = '#ebcb8b'
-	color_bad = '#ba5e57'
+	color_good = "#000000"
+	color_degraded = "#000000"
+	color_bad = "#d31304"
 }
 
 order += "load"
 order += "cpu_temperature 0"
-order += "disk /"
+order += "disk /home"
 order += "volume master"
 order += "wireless _first_"
 order += "battery 0"
@@ -19,16 +19,19 @@ order += "tztime local"
 
 load {
 	format = "<span background='#bd93f9'>  %5min Load </span>"
+	max_threshold = "3.5"
 }
 
 cpu_temperature 0 {
 	format = "<span background='#8ca4ea'>  %degrees °C </span>"
+	#path = "/sys/class/thermal/thermal_zone0/temp"
 	path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
 	max_threshold = "55"
 }
 
-disk "/" {
+disk "/home" {
 	format = "<span background='#fec7cd'>  %avail Free </span>"
+	low_threshold = "25"
 }
 
 volume master {
@@ -52,6 +55,7 @@ battery 0 {
 	status_full = " Charged"
 	path = "/sys/class/power_supply/BAT%d/uevent"
 	low_threshold = 30
+	threshold_type = "percentage"
 }
 
 tztime local {
