@@ -1,0 +1,17 @@
+; Top level editor config.
+root = true
+
+; Always use Unix style new lines with new line ending on every file and trim whitespace
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+[*.py]
+indent_style = space
+indent_size = 4
+[*.tex]
+trim_trailing_whitespace = false
+[*.md]
+trim_trailing_whitespace = false

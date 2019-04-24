@@ -1,12 +1,12 @@
 general {
-	separator = ""
-	output_format = "i3bar"
-	colors = true
-	markup = pango
-	interval = 5
-	color_good = "#000000"
-	color_degraded = "#000000"
-	color_bad = "#d31304"
+  separator = ""
+  output_format = "i3bar"
+  colors = true
+  markup = pango
+  interval = 5
+  color_good = "#000000"
+  color_degraded = "#000000"
+  color_bad = "#d31304"
 }
 
 order += "load"
@@ -18,48 +18,48 @@ order += "battery 0"
 order += "tztime local"
 
 load {
-	format = "<span background='#bd93f9'>  %5min Load </span>"
-	max_threshold = "3.5"
+  format = "<span background='#bd93f9'>  %5min Load </span>"
+  max_threshold = "3.5"
 }
 
 cpu_temperature 0 {
-	format = "<span background='#8ca4ea'>  %degrees °C </span>"
-	#path = "/sys/class/thermal/thermal_zone0/temp"
-	path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
-	max_threshold = "55"
+  format = "<span background='#8ca4ea'>  %degrees °C </span>"
+  #path = "/sys/class/thermal/thermal_zone0/temp"
+  path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
+  max_threshold = "55"
 }
 
 disk "/home" {
-	format = "<span background='#fec7cd'>  %avail Free </span>"
-	low_threshold = "25"
+  format = "<span background='#fec7cd'>  %avail Free </span>"
+  low_threshold = "25"
 }
 
 volume master {
-	format = "<span background='#8be9fb'>  %volume </span>"
-	format_muted = "<span background='#8be9fb'>  Muted </span>"
-	device = "default"
-	mixer = "Master"
-	mixer_idx = 0
+  format = "<span background='#8be9fb'>  %volume </span>"
+  format_muted = "<span background='#8be9fb'>  Muted </span>"
+  device = "default"
+  mixer = "Master"
+  mixer_idx = 0
 }
 
 wireless _first_ {
-	format_up = "<span background='#0aaeff'>  %essid %ip </span>"
-	format_down = "<span background='#0aaeff'>  Disconnected </span>"
+  format_up = "<span background='#2db8fc'>  %essid %ip </span>"
+  format_down = "<span background='#2db8fc'>  Disconnected </span>"
 }
 
 battery 0 {
-	format = "<span background='#50fa7b'> %status %percentage </span>"
-	format_down = " No Battery"
-	status_chr = " Charging"
-	status_bat = " "
-	status_full = " Charged"
-	path = "/sys/class/power_supply/BAT%d/uevent"
-	low_threshold = 30
-	threshold_type = "percentage"
+  format = "<span background='#50fa7b'> %status %percentage </span>"
+  format_down = " No Battery"
+  status_chr = " Charging"
+  status_bat = " "
+  status_full = " Charged"
+  path = "/sys/class/power_supply/BAT%d/uevent"
+  low_threshold = 30
+  threshold_type = "percentage"
 }
 
 tztime local {
-	format = "<span background='#f1fa8c'> %time </span>"
-	format_time = " %-d %b %I:%M"
+  format = "<span background='#f1fa8c'> %time </span>"
+  format_time = " %-d %b %I:%M"
 }
 
