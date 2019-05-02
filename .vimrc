@@ -3,16 +3,16 @@ set runtimepath^=~/.vim/bundle/editorconfig-vim
 
 " general
 syntax on
-set ruler			
-set number			
-set wildmenu			 
-set clipboard=unnamedplus	
-set backspace=eol,start,indent	
-set showmatch			
-set mat=2			
-set cursorline	
+set ruler
+set number
+set wildmenu
+set clipboard=unnamedplus
+set backspace=eol,start,indent
+set showmatch
+set mat=2
+set cursorline
 
-" search 
+" search
 set sel=inclusive
 set ignorecase
 set smartcase
@@ -37,5 +37,11 @@ set t_vb=
 set tm=500
 
 " theme
-color slate 
+color slate
+
+" jj to escape
+imap jj <Esc>
+vmap jj <Esc>
+" ctrl-d to dd in insert mode
+imap <c-d> <Esc>ddi
 

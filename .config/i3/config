@@ -193,4 +193,3 @@ bindsym $mod+g exec google-chrome
 exec xinput set-prop 11 275 1
 # Touchpad scrolling
 exec xinput set-prop 11 294 1 0 0
-
