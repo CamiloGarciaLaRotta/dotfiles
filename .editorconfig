@@ -1,6 +1,5 @@
 ; Top level editor config.
 root = true
-
 ; Always use Unix style new lines with new line ending on every file and trim whitespace
 [*]
 indent_style = space
