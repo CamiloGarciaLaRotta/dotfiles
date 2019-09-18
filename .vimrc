@@ -35,6 +35,9 @@ autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 
 " autocomplete
 set rtp+=~/.vim/bundle/YouCompleteMe
+" no preview window
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt=0
 
 " snippet expansion
 let g:UltiSnipsExpandTrigger="<c-j>"
