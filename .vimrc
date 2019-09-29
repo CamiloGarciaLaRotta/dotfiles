@@ -90,6 +90,7 @@ set mat=2
 set cursorline
 set encoding=utf-8
 set fileencoding=utf-8
+set mouse=a "capture all mouse events
 
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4
