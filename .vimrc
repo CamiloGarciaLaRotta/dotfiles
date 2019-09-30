@@ -51,6 +51,7 @@ let g:ctrlp_cmd = 'CtrlP'
 
 " airline
 let g:airline_powerline_fonts = 1
+let g:airline_theme='oceanicnext'
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -134,12 +135,24 @@ set visualbell
 set t_vb=
 set tm=500
 
-" theme
-color pablo
-
 " ff to escape
 imap ff <Esc>
 vmap ff <Esc>
 " ctrl-d to dd in insert mode
 imap <c-d> <Esc>ddi
 
+" autocomplete HTML
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+
+" rails
+nnoremap <Plug>(rails-test) :Rails test<CR>
+autocmd User Rails nmap <leader>t <Plug>(rails-test)
+
+" commentary
+noremap <leader>\ :Commentary<CR>
+
+" theme
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+colorscheme OceanicNext
+syntax on
