@@ -46,8 +46,3 @@ alias tx="tmux"
 # Install Ruby Gems to ~/gems
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
-export MYSQL_PASS=M3M4T4R0Ndb!
-
-
-export GOOGLE_CLIENT_ID="636309282143-dto1ghcofeihqv4r77s6nuobjknvv4fc.apps.googleusercontent.com"
-export GOOGLE_CLIENT_SECRET="WNiSWmlbI5BsAgQKSiSqdvzA"
