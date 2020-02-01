@@ -1,8 +1,8 @@
 #!/bin/bash
 
-cp -r .bashrc .bashrc-ps1 .editorconfig .profile .inputrc .vimrc .tmux.conf .config ~
+#cp -r .bashrc .bashrc-ps1 .editorconfig .profile .inputrc .vimrc .tmux.conf .config ~
 
-mkdir ~/.vim/bundle ~/.vim/pack/plugins/start
+mkdir -p ~/.vim/bundle ~/.vim/pack/plugins/start
 
 # install autocomplete
 git clone https://github.com/Valloric/YouCompleteMe ~/.vim/bundle/YouCompleteMe
@@ -24,6 +24,8 @@ git clone https://github.com/tpope/vim-bundler ~/.vim/pack/plugins/start/vim-bun
 git clone https://github.com/tpope/vim-endwise ~/.vim/pack/plugins/start/vim-endwise
 git clone https://github.com/tpope/vim-rails ~/.vim/pack/plugins/start/vim-rails
 git clone https://github.com/tpope/vim-ruby ~/.vim/pack/plugins/start/vim-ruby
+git clone https://github.com/jiangmiao/auto-pairs ~/.vim/pack/plugins/start/auto-pairs
+git clone https://github.com/junegunn/fzf.vim ~/.vim/pack/plugins/start/fzf.vim
 
 vim -u NONE -c "helptags vim-go/doc" -c q
 vim -u NONE -c "helptags vim-rails/doc" -c q

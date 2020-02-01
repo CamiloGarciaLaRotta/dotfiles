@@ -1,7 +1,32 @@
+" folding
+"folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=2         "this is just what i use
+" fzf for grep-search
+set rtp+=/usr/local/opt/fzf
+" \f to search git tracked
+nmap <Leader>f :GFiles<CR>
+" \F to search all files
+nmap <Leader>F :Files<CR>
+" \b search open buffers
+nmap <Leader>b :Buffers<CR>
+" \h search buffer history
+nmap <Leader>h :History<CR>
+" \t search tags in curr folder
+nmap <Leader>t :BTags<CR>
+" \T search tags accross project
+nmap <Leader>T :Tags<CR>
+" \/ to search word through project
+nmap <Leader>/ :Ag<Space>
+" nmap <Leader>/ :Rg<Space>
+
 " Go
 filetype plugin indent on
 set autowrite " autosave
 
+let g:go_version_warning = 0
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1 " display func signature when on top of it
 let g:go_auto_sameids = 1   " highlight same var
@@ -19,8 +44,8 @@ let g:go_metalinter_autosave = 1 " vet, lint, errcheck on save
 
 map <C-n> :cnext<CR> " next error
 map <C-m> :cprevious<CR> " prev error
-
 nnoremap <leader>a :cclose<CR> "\a to close quickfix window
+
 " \b to build go file
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 " \r to run go file
@@ -85,13 +110,15 @@ syntax on
 set ruler
 set number
 set wildmenu
-set clipboard=unnamedplus
+set clipboard=unnamed
 set showmatch
 set mat=2
 set cursorline
 set encoding=utf-8
 set fileencoding=utf-8
 set mouse=a "capture all mouse events
+" Use older regex engine, massively speeds ruby syntax highlighting
+set re=1
 
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4
@@ -156,3 +183,10 @@ let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
 syntax on
+set tags=tags
+
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" " Load all of the helptags now, after plugins have been loaded.
+" " All messages and errors will be ignored.
+silent! helptags ALL

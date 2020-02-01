@@ -1,0 +1,13 @@
+[user]
+	email = camilogarcialarotta@github.com
+	name = Camilo Garcia La Rotta
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[core]
+  editor = vim
+[github]
+	user = CamiloGarciaLaRotta
+[push]
+	default = simple
+[credential]
+	helper = osxkeychain
