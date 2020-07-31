@@ -19,12 +19,28 @@ nmap <Leader>t :BTags<CR>
 " \T search tags accross project
 nmap <Leader>T :Tags<CR>
 " \/ to search word through project
-nmap <Leader>/ :Ag<Space>
-" nmap <Leader>/ :Rg<Space>
+nmap <Leader>/ :Rg<Space>
 
 " Go
 filetype plugin indent on
-set autowrite " autosave
+" set autowrite " autosave
+
+autocmd FileType go :ALEDisable
+map <C-m> :ALEPreviousWrap<cr> " next error for ale
+map <C-n> :ALENextWrap<cr> " next error for ale
+autocmd FileType go nmap <C-n> :cnext<CR> " next error for go-vim
+autocmd FileType go nmap <C-m> :cprevious<CR> " prev error
+
+nnoremap <leader>a :cclose<CR> "\a to close quickfix window
+
+" \b to build go file
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+" \r to run go file
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+" \t to test file
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+" \c to coverage
+autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 
 let g:go_version_warning = 0
 let g:go_fmt_command = "goimports"
@@ -40,35 +56,23 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1 " highlight Reader, Buffer, etc
+
+let g:go_def_mode = 'gopls'
+let g:go_info_mode = 'gopls'
+let g:go_rename_command = 'gopls'
+let g:go_gopls_complete_unimported = 1
+
+let g:go_metalinter_enabled = ['govet', 'golint', 'errcheck', 'gocyclo', 'deadcode', 'gosimple', 'staticcheck']
+let g:go_metalinter_autosave_enabled = ['govet', 'golint', 'errcheck', 'gocyclo', 'deadcode', 'gosimple', 'staticcheck']
+let g:go_metalinter_deadline = "60s"
 let g:go_metalinter_autosave = 1 " vet, lint, errcheck on save
-
-map <C-n> :cnext<CR> " next error
-map <C-m> :cprevious<CR> " prev error
-nnoremap <leader>a :cclose<CR> "\a to close quickfix window
-
-" \b to build go file
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-" \r to run go file
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-" \t to test file
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
-" \c to coverage
-autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
-" open test filest in split
-autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+" let g:go_metalinter_command = 'golangci-lint run '
 
 " autocomplete
 set rtp+=~/.vim/bundle/YouCompleteMe
 " no preview window
 set completeopt-=preview
 let g:ycm_add_preview_to_completeopt=0
-
-" snippet expansion
-let g:UltiSnipsExpandTrigger="<c-j>"
-
-" nerdtree
-map <C-f> :NERDTreeToggle<CR>
 
 " fuzzy search
 let g:ctrlp_map = '<c-p>'
@@ -117,8 +121,8 @@ set cursorline
 set encoding=utf-8
 set fileencoding=utf-8
 set mouse=a "capture all mouse events
-" Use older regex engine, massively speeds ruby syntax highlighting
-set re=1
+" " Use older regex engine, massively speeds ruby syntax highlighting
+autocmd Filetype ruby setlocal re=1
 
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4
@@ -162,6 +166,16 @@ set visualbell
 set t_vb=
 set tm=500
 
+" auto-indent
+noremap <leader>= mmgg=G`mzz<CR>
+
+" shortcut to replace
+nnoremap <Leader>c :%s/\<<C-r><C-w>\>/
+vnoremap <Leader>c "hy:%s/<C-r>h/
+
+" % is a shorthand to expand full filename
+map ,t :!tt %<CR>
+
 " ff to escape
 imap ff <Esc>
 vmap ff <Esc>
@@ -174,6 +188,12 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 " rails
 nnoremap <Plug>(rails-test) :Rails test<CR>
 autocmd User Rails nmap <leader>t <Plug>(rails-test)
+
+let g:ale_sign_error = '◉'
+let g:ale_sign_warning = '◉'
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1 " always show sign column, so text doesn't move around
+let g:ale_set_quickfix = 1
 
 " commentary
 noremap <leader>\ :Commentary<CR>
@@ -190,3 +210,6 @@ packloadall
 " " Load all of the helptags now, after plugins have been loaded.
 " " All messages and errors will be ignored.
 silent! helptags ALL
+
+highlight ALEError ctermbg=DarkMagenta
+highlight ALEWarning ctermbg=DarkMagenta

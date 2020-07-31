@@ -5,9 +5,17 @@
 	insteadOf = https://github.com/
 [core]
   editor = vim
+	excludesfile = /Users/camilogarcialarotta/.gitignore
 [github]
 	user = CamiloGarciaLaRotta
 [push]
 	default = simple
 [credential]
 	helper = osxkeychain
+[pager]
+	branch = false
+[color]
+  ui = auto
+
+[pull]
+	rebase = false

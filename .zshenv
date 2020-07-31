@@ -97,6 +97,9 @@ export FZF_TMUX=1
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
 
+# eval "$(rbenv init -)"
+# source ~/.github-api-token
+
 function check_last_exit_code() {
   local LAST_EXIT_CODE=$?
   if [[ $LAST_EXIT_CODE -ne 0 ]]; then
@@ -116,6 +119,9 @@ PROMPT+='$FG[228]%1~ %{$reset_color%}'
 PROMPT+='$(git_prompt_info)'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# cd ~/git/github
+
 
 export PATH=/usr/local/bin:$PATH
 export PATH="$HOME/.rbenv/bin:$PATH"
