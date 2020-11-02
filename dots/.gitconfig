@@ -16,6 +16,9 @@
 	branch = false
 [color]
   ui = auto
-
 [pull]
 	rebase = false
+[log]
+	date = iso-local
+[blame]
+	date = iso-local

@@ -1,40 +1,75 @@
 #!/bin/bash
 
-ln -s ~/.dotfiles/.editorconfig ~/
-ln -s ~/.dotfiles/.fzf.zsh ~/
-ln -s ~/.dotfiles/.git-prompt.sh ~/
-ln -s ~/.dotfiles/.gitconfig ~/
-ln -s ~/.dotfiles/.gitignore ~/
-ln -s ~/.dotfiles/.tmux.conf ~/
-ln -s ~/.dotfiles/.vimrc ~/
-ln -s ~/.dotfiles/.zshenv ~/
-ln -s ~/.dotfiles/.zshrc ~/
+vim_path="$HOME/.vim/pack/plugins/start"
+
+function brewget {
+  if brew ls --versions "$1"; then
+    brew upgrade "$1"
+  else
+    brew install "$1"
+  fi
+}
+
+function clone {
+  repo=$(echo "$1" | cut -d'/' -f2)
+  if [ ! -d "$vim_path/$repo" ]
+  then
+    echo "=> installing $1"
+    git clone --depth 1 "https://github.com/$1" "$vim_path/$repo"
+  else
+    echo "=> updating $1"
+    echo "$vim_path/$repo"
+    (cd "$vim_path/$repo"; git pull)
+  fi
+}
+
+if which -s brew; then
+  echo "=> updating brew"
+  brew update
+else
+  echo "=> installing brew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
+
+# symbolic link for all dotfiles
+echo "=> symbolic link for dotfiles"
+find ./dots -maxdepth 1 -mindepth 1 -exec sh -c 'ln -s "$1" ~' sh {} \;
 
 # vim
-mkdir -p ~/.vim/pack/plugins/start
+echo "=> configuring Vim"
+mkdir -p "$vim_path"
 
-git clone https://github.com/editorconfig/editorconfig-vim.git ~/.vim/pack/plugins/start/editorconfig-vim
-git clone https://github.com/fatih/vim-go.git ~/.vim/pack/plugins/start/vim-go
-git clone https://github.com/jiangmiao/auto-pairs ~/.vim/pack/plugins/start/auto-pairs
-git clone https://github.com/junegunn/fzf.vim ~/.vim/pack/plugins/start/fzf.vim
-git clone https://github.com/mhartington/oceanic-next ~/.vim/pack/plugins/start/oceanic-next
-git clone https://github.com/scrooloose/nerdtree.git ~/.vim/pack/plugins/start/nerdtree
-git clone https://github.com/tpope/vim-commentary ~/.vim/pack/plugins/start/vim-commentary
-git clone https://github.com/tpope/vim-endwise ~/.vim/pack/plugins/start/vim-endwise
-git clone https://github.com/tpope/vim-fugitive.git ~/.vim/pack/plugins/start/vim-fugitive
-git clone https://github.com/tpope/vim-rails ~/.vim/pack/plugins/start/vim-rails
-git clone https://github.com/tpope/vim-ruby ~/.vim/pack/plugins/start/vim-ruby
-git clone https://github.com/vim-airline/vim-airline ~/.vim/pack/plugins/start/vim-airline
+brewget "fzf"
+brewget "tmux"
 
-vim -u NONE -c "helptags commentary/doc" -c q
-vim -u NONE -c "helptags vim-airline/doc" -c q
-vim -u NONE -c "helptags vim-fugitive/doc" -c q
+clone "ap/vim-css-color"
+clone "dense-analysis/ale"
+clone "editorconfig/editorconfig-vim"
+clone "fatih/vim-go"
 vim -u NONE -c "helptags vim-go/doc" -c q
+clone "jiangmiao/auto-pairs"
+clone "junegunn/fzf.vim"
+clone "mhartington/oceanic-next"
+clone "tpope/vim-commentary"
+vim -u NONE -c "helptags commentary/doc" -c q
+clone "tpope/vim-endwise"
+clone "tpope/vim-fugitive"
+vim -u NONE -c "helptags vim-fugitive/doc" -c q
+clone "tpope/vim-rails"
 vim -u NONE -c "helptags vim-rails/doc" -c q
-vim -u NONE -c "helptags vim-ruby/doc" -c q
+clone "tpope/vim-rhubarb"
+vim -u NONE -c "helptags vim-rhubarb/doc" -c q
+clone "vim-airline/vim-airline"
+vim -u NONE -c "helptags vim-airline/doc" -c q
 
-# zsh
 if [ "$SHELL" != "/usr/bin/zsh" ]; then
-    sudo apt install -y zsh
-    zsh
-fi;
+  echo "=> installing zsh"
+  brew install zsh
+fi
+
+# To install useful key bindings and fuzzy completion:
+echo  "=> PLEASE RUN:"
+echo "$(brew --prefix)/opt/fzf/install"
+echo "echo \"machine api.github.com login <user> password <token>\" >> ~/.netrc"
+
+zsh
