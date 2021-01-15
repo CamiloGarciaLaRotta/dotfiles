@@ -53,6 +53,7 @@ clone "mhartington/oceanic-next"
 clone "tpope/vim-commentary"
 vim -u NONE -c "helptags commentary/doc" -c q
 clone "tpope/vim-endwise"
+clone "AndrewRadev/tagalong.vim"
 clone "tpope/vim-fugitive"
 vim -u NONE -c "helptags vim-fugitive/doc" -c q
 clone "tpope/vim-rails"
