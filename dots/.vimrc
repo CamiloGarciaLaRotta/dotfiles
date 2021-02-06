@@ -221,7 +221,7 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
 " Autocompletion {{{
 set rtp+=~/.vim/bundle/YouCompleteMe
-no preview window
+" no preview window THIS THING WAS MAKING PASTE SLOW
 set completeopt-=preview
 let g:ycm_add_preview_to_completeopt=0
 " }}}

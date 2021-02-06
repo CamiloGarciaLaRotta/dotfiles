@@ -47,7 +47,6 @@ clone "dense-analysis/ale"
 clone "editorconfig/editorconfig-vim"
 clone "fatih/vim-go"
 vim -u NONE -c "helptags vim-go/doc" -c q
-clone "jiangmiao/auto-pairs"
 clone "junegunn/fzf.vim"
 clone "mhartington/oceanic-next"
 clone "tpope/vim-commentary"
