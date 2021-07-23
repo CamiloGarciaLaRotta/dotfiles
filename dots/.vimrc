@@ -348,8 +348,6 @@ packloadall
 " " Load all of the helptags now, after plugins have been loaded.
 " " All messages and errors will be ignored.
 silent! helptags ALL
-" load helptags in /doc
-helptags ~/.vim/doc
 " }}}
 
 " vipJ: join lines in paragraph
