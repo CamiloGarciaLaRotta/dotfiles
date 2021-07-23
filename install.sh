@@ -84,3 +84,4 @@ clone "vim-airline/vim-airline"
 vim -u NONE -c "helptags $vim_path/vim-airline/doc" -c q
 
 sudo chsh -s "$(which zsh)" "$(whoami)"
+zsh
