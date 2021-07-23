@@ -43,7 +43,7 @@ find ./dots -maxdepth 1 -mindepth 1 -exec sh -c 'cp "$1" ~' sh {} \;
 
 if [ "$CODESPACES" = true ]; then
   sudo apt-get install -y \
-    bat fzf ripgrep shellcheck tmux zsh zsh-autosuggestions
+    bat ripgrep shellcheck tmux zsh zsh-autosuggestions
 
   # codespaces debian doesn't support bat/exa, use defaults
   echo "alias cat='cat'" >> "$HOME/.zhsenv"
@@ -54,28 +54,26 @@ else
   setup_brew
   brew_get "bat"
   brew_get "exa"
-  brew_get "fzf"
   brew_get "ripgrep"
   brew_get "shellcheck"
   brew_get "tmux"
   brew_get "zsh"
   brew-get "zsh-autosuggestions"
-
-  # To install useful key bindings and fuzzy completion:
-  "$(brew --prefix)/opt/fzf/install"
 fi
 
 # vim
 echo "=> configuring Vim"
 mkdir -p "$vim_path"
 
+clone "junegunn/fzf"
+clone "junegunn/fzf.vim"
+"$HOME/.fzf/install --all"
+
 clone "ap/vim-css-color"
 clone "dense-analysis/ale"
 clone "editorconfig/editorconfig-vim"
 clone "fatih/vim-go"
 vim -u NONE -c "helptags $vim_path/vim-go/doc" -c q
-clone "junegunn/fzf"
-clone "junegunn/fzf.vim"
 clone "mhartington/oceanic-next"
 clone "tpope/vim-commentary"
 vim -u NONE -c "helptags $vim_path/vim-commentary/doc" -c q
@@ -91,4 +89,4 @@ clone "vim-airline/vim-airline"
 vim -u NONE -c "helptags $vim_path/vim-airline/doc" -c q
 
 sudo chsh -s "$(which zsh)" "$(whoami)"
-zsh
+exec zsh
