@@ -96,7 +96,7 @@ set magic           " grep notation
 set rtp+=/usr/local/opt/fzf
 
 " keep the popup in the bottom part of the screen
-let g:fzf_layout = { 'down': '60%' }
+let g:fzf_layout = { 'down': '70%' }
 
 " to search git tracked
 nnoremap <Leader>f :GFiles<cr>
