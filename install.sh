@@ -5,6 +5,7 @@ exec 2>&1
 set -x
 
 echo "fooooo setup.sh"
+pwd
 
 vim_path="$HOME/.vim/pack/plugins/start"
 
@@ -46,7 +47,7 @@ if [ "$CODESPACES" = true ]; then
   rm -f "$HOME/.zshrc"
   rm -f "$HOME/.gitconfig"
 
-  apt-get install -y \
+  sudo apt-get install -y \
     bat exa locate ripgrep shellcheck tmux zsh-autosuggestions
 
   # Setup the database for locate
@@ -64,8 +65,6 @@ else
   brew-get "zsh-autosuggestions"
 
 fi
-
-chsh -s "$(which zsh)"
 
 # symbolic link for all dotfiles
 echo "=> symbolic link for dotfiles"
@@ -101,7 +100,4 @@ vim -u NONE -c "helptags vim-rhubarb/doc" -c q
 clone "vim-airline/vim-airline"
 vim -u NONE -c "helptags vim-airline/doc" -c q
 
-# To install useful key bindings and fuzzy completion:
-echo  "=> PLEASE RUN:"
-echo "echo \"machine api.github.com login <user> password <token>\" >> ~/.netrc"
-
+chsh -s "$(which zsh)"
