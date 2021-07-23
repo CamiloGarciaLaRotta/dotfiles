@@ -1,3 +1,5 @@
+# ssh cloning wont work because my public keys are not in the codespace
+# keymanager osxkeychain is not present in unix
 [user]
 	email = camilogarcialarotta@github.com
 	name = Camilo Garcia La Rotta

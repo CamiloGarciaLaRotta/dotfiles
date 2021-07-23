@@ -1,7 +1,3 @@
-" Treat comments as folds
-" vim: set foldmethod=marker:
-
-" TODO augroup
 " General {{{
 syntax on               " syntax highlighting
 set ruler               " show line and column number in the airline footer
@@ -79,6 +75,11 @@ noremap <leader>= mmgg=G`mzz<cr>    " auto indent all file
 set foldmethod=indent   " fold based on indentation
 set foldnestmax=10      " deepest fold is 10 levels
 set foldlevel=1         " open files with all indentations >1 folded
+
+augroup filetype_vim
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+augroup END
 " }}}
 
 " Search {{{
@@ -97,11 +98,16 @@ set rtp+=/usr/local/opt/fzf
 " keep the popup in the bottom part of the screen
 let g:fzf_layout = { 'down': '90%' }
 
-nnoremap <Leader>f :GFiles<cr>    " to search git tracked
-nnoremap <Leader>F :Files<cr>     " to search all files
-nnoremap <Leader>b :Buffers<cr>   " search open buffers
-nnoremap <Leader>h :History<cr>   " search buffer history
-nnoremap <Leader>/ :Rg<Space>     " to search word through project
+" to search git tracked
+nnoremap <Leader>f :GFiles<cr>
+" to search all files
+nnoremap <Leader>F :Files<cr>
+" search open buffers
+nnoremap <Leader>b :Buffers<cr>
+" search buffer history
+nnoremap <Leader>h :History<cr>
+" to search word through project
+nnoremap <Leader>/ :Rg<Space>
 
 " }}}
 
@@ -134,39 +140,49 @@ inoreabbrev lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integ
 " loop through next/previous errors
 noremap <C-m> :ALEPreviousWrap<cr>
 noremap <C-n> :ALENextWrap<cr>
+" close quickfix window
+nnoremap <leader>a :cclose<cr>
+
+
+" user tab and stab to cycle through autocomplete
+inoremap <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 let g:ale_sign_error = '◉'
 let g:ale_sign_warning = '◉'
 let g:ale_completion_enabled = 1
 let g:ale_sign_column_always = 1    " always show sign column, so text doesn't move around
+let g:ale_completion_delay = 20
 let g:ale_set_quickfix = 1
 
+let g:ale_linters = {
+            \ 'go': ['gopls'],
+            \ }
 highlight ALEError ctermbg=DarkMagenta
 highlight ALEWarning ctermbg=DarkMagenta
 " }}}
 
 " Golang {{{
 
-" ts - show existing tab with 4 spaces width
-" sw - when indenting with '>', use 4 spaces width
-" sts - control <tab> and <bs> keys to match tabstop
-autocmd Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4
+augroup filetype_go
+  " ts - show existing tab with 4 spaces width
+  " sw - when indenting with '>', use 4 spaces width
+  " sts - control <tab> and <bs> keys to match tabstop
+  autocmd Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
-" use go-vim instead
-autocmd FileType go :ALEDisable
+  " use go-vim instead
+  autocmd FileType go :ALEDisable
 
-" loop through next/previous errors
-autocmd FileType go nnoremap <C-n> :cnext<cr>
-autocmd FileType go nnoremap <C-m> :cprevious<cr>
+  " loop through next/previous errors
+  autocmd FileType go nnoremap <C-n> :cnext<cr>
+  autocmd FileType go nnoremap <C-m> :cprevious<cr>
 
-" close quickfix window
-nnoremap <leader>a :cclose<cr>
-
-" build/run/test/coverate go file
-autocmd FileType go nnoremap <leader>b  <Plug>(go-build)
-autocmd FileType go nnoremap <leader>r  <Plug>(go-run)
-autocmd FileType go nnoremap <leader>t  <Plug>(go-test)
-autocmd FileType go nnoremap <Leader>c  <Plug>(go-coverage-toggle)
+  " build/run/test/coverate go file
+  autocmd FileType go nnoremap <leader>b  <Plug>(go-build)
+  autocmd FileType go nnoremap <leader>r  <Plug>(go-run)
+  autocmd FileType go nnoremap <leader>t  <Plug>(go-test)
+  autocmd FileType go nnoremap <Leader>c  <Plug>(go-coverage-toggle)
+augroup END
 
 let g:go_version_warning = 0
 let g:go_fmt_command = "goimports"
@@ -197,33 +213,38 @@ let g:go_metalinter_autosave = 1 " vet, lint, errcheck on save
 
 " Ruby {{{
 
-" Use older regex engine, massively speeds ruby syntax highlighting
-autocmd Filetype ruby setlocal re=1
+augroup filetype_ruby
+  " Use older regex engine, massively speeds ruby syntax highlighting
+  autocmd Filetype ruby setlocal re=1
 
-" % is a shorthand to expand full filename
-" tt is a .zhsenv alias to 'rails test'
-autocmd Filetype ruby nnoremap <leader>t :!tt %<cr>
+  " % is a shorthand to expand full filename
+  " tt is a .zhsenv alias to 'rails test'
+  autocmd Filetype ruby nnoremap <leader>t :!tt %<cr>
+augroup END
 " }}}
 
 " Python {{{
 
-" ts - show existing tab with 4 spaces width
-" sw - when indenting with '>', use 4 spaces width
-" sts - control <tab> and <bs> keys to match tabstop
-autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+augroup filetype_python
+  " ts - show existing tab with 4 spaces width
+  " sw - when indenting with '>', use 4 spaces width
+  " sts - control <tab> and <bs> keys to match tabstop
+  autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+augroup END
 " }}}
 
 " HTML {{{
 
-" autocomplete HTML
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+augroup filetype_html
+  " autocomplete HTML
+  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+augroup END
 " }}}
 
 " Autocompletion {{{
-set rtp+=~/.vim/bundle/YouCompleteMe
-" no preview window THIS THING WAS MAKING PASTE SLOW
+
+" don't show the preview window (bottom half) just show the dropdown
 set completeopt-=preview
-let g:ycm_add_preview_to_completeopt=0
 " }}}
 
 " Airline {{{
@@ -262,7 +283,6 @@ let g:airline_symbols.linenr = ''
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
-
 " }}}
 
 " Useful mappings {{{
@@ -276,8 +296,10 @@ nnoremap <Leader>c :%s/\<<C-r><C-w>\>/
 vnoremap <Leader>c "hy:%s/<C-r>h/
 
 " move a line upwards/downwards
-noremap + ddkP
-noremap - ddp
+nnoremap + ddkP==
+nnoremap - ddp==
+
+vnoremap + dkP==
 
 " enclose word with quotes
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel

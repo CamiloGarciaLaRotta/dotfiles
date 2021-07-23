@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+# codespaces won't need rbenv if $CODESPACES is defined no need for it
+# brew install  on unix based on the system it's being run on
+# dont make symlinks from ./dots but from pwd
 vim_path="$HOME/.vim/pack/plugins/start"
 
 function brewget {
