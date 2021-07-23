@@ -4,9 +4,6 @@ exec > >(tee -i "$HOME/dotfiles_install.log")
 exec 2>&1
 set -x
 
-echo "fooooo setup.sh"
-pwd
-
 vim_path="$HOME/.vim/pack/plugins/start"
 
 function brew_get {
@@ -41,40 +38,34 @@ function setup_brew {
 }
 
 if [ "$CODESPACES" = true ]; then
-  echo "WAKAFLAKA"
+  sudo apt install -y exa
+  sudo apt-get install -y \
+    bat fzf locate ripgrep shellcheck tmux zsh zsh-autosuggestions
+
+  # Setup the database for locate
+  updatedb
 
   # remove existing init scripts
   rm -f "$HOME/.zshrc"
   rm -f "$HOME/.gitconfig"
-
-  sudo apt-get install -y \
-    bat exa locate ripgrep shellcheck tmux zsh-autosuggestions
-
-  # Setup the database for locate
-  updatedb
 else
-  echo "NO WAKAFLAKA"
   setup_brew
-
   brew_get "bat"
   brew_get "exa"
+  brew_get "fzf"
   brew_get "ripgrep"
   brew_get "shellcheck"
   brew_get "tmux"
   brew_get "zsh"
   brew-get "zsh-autosuggestions"
 
+  # To install useful key bindings and fuzzy completion:
+  "$(brew --prefix)/opt/fzf/install"
 fi
 
 # symbolic link for all dotfiles
 echo "=> symbolic link for dotfiles"
 find ./dots -maxdepth 1 -mindepth 1 -exec sh -c 'ln -s "$1" ~' sh {} \;
-
-rm -rf "$HOME/.fzf"
-git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
-"$HOME/.fzf/install" --all
-mv "$HOME/.fzf/bin/fzf" "$BIN_PATH"
-
 
 # vim
 echo "=> configuring Vim"
