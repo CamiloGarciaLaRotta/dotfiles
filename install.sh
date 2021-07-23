@@ -1,9 +1,17 @@
 #!/bin/bash
 
+exec > >(tee -i $HOME/dotfiles_install.log)
+exec 2>&1
+set -x
+
+echo "fooooo setup.sh"
 
 # codespaces won't need rbenv if $CODESPACES is defined no need for it
 # brew install  on unix based on the system it's being run on
 # dont make symlinks from ./dots but from pwd
+if ! [ "$CODESPACES" = true ]; then
+   echo "WAKAFLAKA"
+fi
 vim_path="$HOME/.vim/pack/plugins/start"
 
 function brewget {
