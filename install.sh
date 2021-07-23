@@ -100,4 +100,5 @@ vim -u NONE -c "helptags vim-rhubarb/doc" -c q
 clone "vim-airline/vim-airline"
 vim -u NONE -c "helptags vim-airline/doc" -c q
 
-chsh -s "$(which zsh)"
+whoami
+sudo chsh -s "$(which zsh)" "$(whoami)"
