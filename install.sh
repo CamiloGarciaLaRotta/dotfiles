@@ -44,6 +44,12 @@ find ./dots -maxdepth 1 -mindepth 1 -exec sh -c 'cp "$1" ~' sh {} \;
 if [ "$CODESPACES" = true ]; then
   sudo apt-get install -y \
     bat fzf ripgrep shellcheck tmux zsh zsh-autosuggestions
+
+  # codespaces debian doesn't support bat/exa, use defaults
+  echo "alias cat='cat'" >> "$HOME/.zhsenv"
+  echo "alias ls='ls'" >> "$HOME/.zhsenv"
+  echo "alias ll='ls -l'" >> "$HOME/.zhsenv"
+  echo "alias la='ls -la'" >> "$HOME/.zhsenv"
 else
   setup_brew
   brew_get "bat"
@@ -68,6 +74,7 @@ clone "dense-analysis/ale"
 clone "editorconfig/editorconfig-vim"
 clone "fatih/vim-go"
 vim -u NONE -c "helptags $vim_path/vim-go/doc" -c q
+clone "junegunn/fzf"
 clone "junegunn/fzf.vim"
 clone "mhartington/oceanic-next"
 clone "tpope/vim-commentary"
