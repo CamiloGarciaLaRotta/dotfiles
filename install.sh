@@ -71,20 +71,20 @@ clone "ap/vim-css-color"
 clone "dense-analysis/ale"
 clone "editorconfig/editorconfig-vim"
 clone "fatih/vim-go"
-vim -u NONE -c "helptags $vim_path/fatih/vim-go/doc" -c q
+vim -u NONE -c "helptags $vim_path/vim-go/doc" -c q
 clone "junegunn/fzf.vim"
 clone "mhartington/oceanic-next"
 clone "tpope/vim-commentary"
-vim -u NONE -c "helptags $vim_path/tpope/commentary/doc" -c q
+vim -u NONE -c "helptags $vim_path/vim-commentary/doc" -c q
 clone "tpope/vim-endwise"
 clone "AndrewRadev/tagalong.vim"
 clone "tpope/vim-fugitive"
-vim -u NONE -c "helptags $vim_path/tpope/vim-fugitive/doc" -c q
+vim -u NONE -c "helptags $vim_path/vim-fugitive/doc" -c q
 clone "tpope/vim-rails"
-vim -u NONE -c "helptags $vim_path/tpope/vim-rails/doc" -c q
+vim -u NONE -c "helptags $vim_path/vim-rails/doc" -c q
 clone "tpope/vim-rhubarb"
-vim -u NONE -c "helptags $vim_path/tpope/vim-rhubarb/doc" -c q
+vim -u NONE -c "helptags $vim_path/vim-rhubarb/doc" -c q
 clone "vim-airline/vim-airline"
-vim -u NONE -c "helptags $vim_path/vim-airline/vim-airline/doc" -c q
+vim -u NONE -c "helptags $vim_path/vim-airline/doc" -c q
 
 sudo chsh -s "$(which zsh)" "$(whoami)"
