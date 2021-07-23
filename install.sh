@@ -37,13 +37,13 @@ function setup_brew {
   fi
 }
 
+# cp over dotfiles
+echo "=> symbolic link for dotfiles"
+find ./dots -maxdepth 1 -mindepth 1 -exec sh -c 'cp "$1" ~' sh {} \;
+
 if [ "$CODESPACES" = true ]; then
   sudo apt-get install -y \
     bat fzf ripgrep shellcheck tmux zsh zsh-autosuggestions
-
-  # remove existing init scripts. Later on we will link our dotfiles
-  rm -f "$HOME/.zshrc"
-  rm -f "$HOME/.gitconfig"
 else
   setup_brew
   brew_get "bat"
@@ -58,10 +58,6 @@ else
   # To install useful key bindings and fuzzy completion:
   "$(brew --prefix)/opt/fzf/install"
 fi
-
-# symbolic link for all dotfiles
-echo "=> symbolic link for dotfiles"
-find ./dots -maxdepth 1 -mindepth 1 -exec sh -c 'ln -s "$1" ~' sh {} \;
 
 # vim
 echo "=> configuring Vim"
