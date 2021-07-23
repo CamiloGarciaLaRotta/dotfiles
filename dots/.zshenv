@@ -60,6 +60,7 @@ alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(blue)%
 alias gs="git status"
 alias ga="git add"
 alias gm="git checkout master"
+alias gmm="git checkout main"
 alias gco="git checkout"
 alias gcp="git cherry-pick"
 alias gc="git commit --verbose"
@@ -73,8 +74,18 @@ alias ts="tmux ls"
 alias tk="tmux kill-server"
 alias ta="tmux a -t "
 alias tn="tmux new -t "
+alias td="tmux detach"
 alias tt="bin/rails test "
+alias TT="TEST_ALL_FEATURES=1 bin/rails test "
 alias tc="bin/rails test_changes"
+
+alias cs="ghcs"
+alias csc="ghcs create"
+alias csd="ghcs delete"
+alias csl="ghcs list"
+alias css="ghcs ssh"
+alias csa="ghcs create --repo github/authzd --branch master"
+alias csg="ghcs create --repo github/github --branch master"
 
 alias ctags='/usr/local/bin/ctags'
 
@@ -119,9 +130,30 @@ PROMPT+='$(git_prompt_info)'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+
 # cd ~/git/github
 
+export GPG_TTY=$TTY
 
 export PATH=/usr/local/bin:$PATH
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
+
+function delete_ghae() {
+  group_name="$1"
+  echo "Marking resource group $group_name for deletion."
+  az tag update --resource-id "$group_name" --operation merge --tags "auto_cleanup_date_utc='01/01/21@00:00:00'" || true
+}
+
+function delete_all_ghae() {
+  subscription=${1:-"GHAE Dev 4"}
+  for i in $(az group list --subscription "$subscription" --query "[?tags.owner=='camilogarcialarotta'].id" -otsv); do
+    echo $i
+    delete_ghae $i
+   done
+}
+
+function list_ghae() {
+  subscription=${1:-"GHAE Dev 4"}
+  az group list --subscription "$subscription" --query "[?tags.owner=='camilogarcialarotta'].name"
+}

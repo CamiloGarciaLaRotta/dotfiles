@@ -173,16 +173,41 @@ augroup filetype_go
   " use go-vim instead
   autocmd FileType go :ALEDisable
 
+
   " loop through next/previous errors
   autocmd FileType go nnoremap <C-n> :cnext<cr>
   autocmd FileType go nnoremap <C-m> :cprevious<cr>
 
   " build/run/test/coverate go file
-  autocmd FileType go nnoremap <leader>b  <Plug>(go-build)
-  autocmd FileType go nnoremap <leader>r  <Plug>(go-run)
-  autocmd FileType go nnoremap <leader>t  <Plug>(go-test)
-  autocmd FileType go nnoremap <Leader>c  <Plug>(go-coverage-toggle)
+  autocmd FileType go nmap <leader>b  <Plug>(go-build)
+  autocmd FileType go nmap <leader>r  <Plug>(go-run)
+  autocmd FileType go nmap <leader>t  <Plug>(go-test)
+  autocmd FileType go nmap <Leader>c  <Plug>(go-coverage-toggle)
+
+  set foldlevel=3         " open files with all indentations >1 folded
+
+  autocmd FileType go nnoremap gdq :GoDebugStop<CR>
+  autocmd FileType go nnoremap gdd :GoDebugTestFunc<CR>
+  autocmd FileType go nnoremap gdb :GoDebugBreakpoint<CR>
+  autocmd FileType go nnoremap gds :GoDebugStep<CR>
+  autocmd FileType go nnoremap gdn :GoDebugNext<CR>
+  autocmd FileType go nnoremap gdo :GoDebugStepOut<CR>
+  autocmd FileType go nnoremap gdc :GoDebugContinue<CR>
 augroup END
+
+
+  let g:go_debug_mappings = {
+    \ '(go-debug-continue)': {'key': 'c', 'arguments': '<nowait>'},
+    \ '(go-debug-next)': {'key': 'n', 'arguments': '<nowait>'},
+    \ '(go-debug-step)': {'key': 's'},
+    \ '(go-debug-print)': {'key': 'p'},
+  \}
+
+let g:go_debug_windows = {
+      \ 'vars':       'rightbelow 75vnew',
+      \ 'stack':      'rightbelow 25new',
+      \ 'out':        'botright 10new',
+\ }
 
 let g:go_version_warning = 0
 let g:go_fmt_command = "goimports"
@@ -204,10 +229,12 @@ let g:go_info_mode = 'gopls'
 let g:go_rename_command = 'gopls'
 let g:go_gopls_complete_unimported = 1
 
-let g:go_metalinter_enabled = ['govet', 'golint', 'errcheck', 'gocyclo', 'deadcode', 'gosimple', 'staticcheck']
-let g:go_metalinter_autosave_enabled = ['govet', 'golint', 'errcheck', 'gocyclo', 'deadcode', 'gosimple', 'staticcheck']
+
+let g:go_metalinter_enabled = []
+let g:go_metalinter_autosave_enabled = []
 let g:go_metalinter_deadline = "60s"
 let g:go_metalinter_autosave = 1 " vet, lint, errcheck on save
+let g:go_metalinter_command='golangci-lint'
 
 " }}}
 
@@ -295,11 +322,12 @@ vnoremap ff <Esc>
 nnoremap <Leader>c :%s/\<<C-r><C-w>\>/
 vnoremap <Leader>c "hy:%s/<C-r>h/
 
-" move a line upwards/downwards
-nnoremap + ddkP==
-nnoremap - ddp==
-
-vnoremap + dkP==
+" Bubble single lines up and down
+nnoremap - :.move +1<CR>==
+nnoremap + :.move -2<CR>==
+" Bubble lines up and down in visual mode
+vnoremap + :move '<-2<CR>gv=gv
+vnoremap - :move '>+1<CR>gv=gv
 
 " enclose word with quotes
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
@@ -320,4 +348,11 @@ packloadall
 " " Load all of the helptags now, after plugins have been loaded.
 " " All messages and errors will be ignored.
 silent! helptags ALL
+" load helptags in /doc
+helptags ~/.vim/doc
 " }}}
+
+" vipJ: join lines in paragraph
+" I :   insert at the beginning of the line
+" ():   sentence
+" {}:   paragraph
