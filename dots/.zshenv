@@ -49,12 +49,10 @@ export PATH=~/.npm-global/bin:$PATH
 
 #### ALIAS
 alias rg='rg -p -i --hidden'
-alias cat='bat'
-alias ls='exa'
-alias ll='exa -l'
-alias la='exa -la'
-alias python='python3'
-alias dnf='sudo dnf'
+# alias cat='bat'
+# alias ls='exa'
+# alias ll='exa -l'
+# alias la='exa -la'
 alias gl="git log --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an>%Creset' --abbrev-commit $@"
 alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) %C(yellow)%d%C(reset) - %C(green)(%ar)%C(reset) %C()%s%C(reset) %C(blue)- %an%C(reset)' --all"
 alias gs="git status"

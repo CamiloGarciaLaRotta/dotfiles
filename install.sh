@@ -45,11 +45,10 @@ if [ "$CODESPACES" = true ]; then
   sudo apt-get install -y \
     bat ripgrep shellcheck tmux zsh zsh-autosuggestions
 
-  # codespaces debian doesn't support bat/exa, use defaults
-  echo "alias cat='cat'" >> "$HOME/.zhsenv"
-  echo "alias ls='ls'" >> "$HOME/.zhsenv"
-  echo "alias ll='ls -l'" >> "$HOME/.zhsenv"
-  echo "alias la='ls -la'" >> "$HOME/.zhsenv"
+  curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+  sudo apt update
+  sudo apt install gh
 else
   setup_brew
   brew_get "bat"
