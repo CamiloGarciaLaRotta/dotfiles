@@ -35,7 +35,7 @@ source $ZSH/oh-my-zsh.sh
 
 #### EXPORTS
 # pretty man
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export GOPATH=$HOME/go
 # export GOROOT=/usr/local/bin/go
