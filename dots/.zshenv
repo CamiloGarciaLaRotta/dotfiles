@@ -134,8 +134,8 @@ PROMPT+='$(git_prompt_info)'
 export GPG_TTY=$TTY
 
 export PATH=/usr/local/bin:$PATH
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh)"
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init - zsh)"
 
 function delete_ghae() {
   group_name="$1"
