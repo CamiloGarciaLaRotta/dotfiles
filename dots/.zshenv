@@ -82,8 +82,8 @@ alias csc="ghcs create"
 alias csd="ghcs delete"
 alias csl="ghcs list"
 alias css="ghcs ssh"
-alias csdots="ghcs create --repo camilogarcialarotta/dotfiles --branch master"
-alias csa="ghcs create --repo github/authzd --branch master"
+alias csdots="ghcs create --repo camilogarcialarotta/dotfiles --branch master --machine standardLinux32gb"
+alias csa="ghcs create --repo github/authzd --branch master --machine extremeLinux"
 alias csg="ghcs create --repo github/github --branch master --machine extremeLinux"
 
 alias ctags='/usr/local/bin/ctags'
