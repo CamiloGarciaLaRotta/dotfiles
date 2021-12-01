@@ -77,14 +77,16 @@ alias tt="bin/rails test "
 alias TT="TEST_ALL_FEATURES=1 bin/rails test "
 alias tc="bin/rails test_changes"
 
-alias cs="ghcs"
-alias csc="ghcs create"
-alias csd="ghcs delete"
-alias csl="ghcs list"
-alias css="ghcs ssh"
-alias csdots="ghcs create --repo camilogarcialarotta/dotfiles --branch master --machine standardLinux32gb"
-alias csa="ghcs create --repo github/authzd --branch master --machine extremeLinux"
-alias csg="ghcs create --repo github/github --branch master --machine extremeLinux"
+alias cs="gh cs"
+alias csc="gh cs create"
+alias csd="gh cs delete"
+alias csl="gh cs list"
+alias css="gh cs ssh"
+alias csp="gh cs ports"
+alias cspp="gh cs ports visibility 80:public"
+alias csdots="gh cs create --repo camilogarcialarotta/dotfiles --branch master --machine standardLinux32gb"
+alias csa="gh cs create --repo github/authzd --branch master --machine xLargePremiumLinux"
+alias csg="gh cs create --repo github/github --branch master --machine xLargePremiumLinux"
 
 alias ctags='/usr/local/bin/ctags'
 
@@ -94,6 +96,12 @@ alias s='GH_SSL=1 ENABLE_EMAIL_PREVIEWS=1 script/server'
 alias bs='b && s'
 alias dbd='script/setup --dotcom'
 alias dbe='script/setup --enterprise'
+alias dbs='bin/toggle-feature-flag enable custom_roles && bin/toggle-feature-flag enable repo_access_management && s'
+
+alias z='zed --insecure'
+alias zsr='z schema read'
+alias zp='z permission'
+alias zr='z relationship'
 
 alias inflate='ruby -r zlib -e "STDOUT.write Zlib::Inflate.inflate(STDIN.read)"'
 
@@ -156,3 +164,4 @@ function list_ghae() {
   subscription=${1:-"GHAE Dev 4"}
   az group list --subscription "$subscription" --query "[?tags.owner=='camilogarcialarotta'].name"
 }
+unset GITHUB_TOKEN
