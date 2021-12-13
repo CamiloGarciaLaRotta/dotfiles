@@ -16,3 +16,5 @@ trim_trailing_whitespace = false
 trim_trailing_whitespace = false
 [*.ts]
 insert_final_newline = true
+[Makefile]
+indent_style = tab
