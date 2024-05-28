@@ -52,7 +52,7 @@ if [ "$CODESPACES" = true ]; then
 else
   setup_brew
   brew_get "bat"
-  brew_get "exa"
+  brew_get "eza"
   brew_get "ripgrep"
   brew_get "shellcheck"
   brew_get "tmux"
@@ -87,6 +87,11 @@ vim -u NONE -c "helptags $vim_path/vim-rhubarb/doc" -c q
 clone "vim-airline/vim-airline"
 vim -u NONE -c "helptags $vim_path/vim-airline/doc" -c q
 
-sudo chsh -s "$(which zsh)" "$(whoami)"
+# oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-echo "PLEASE INSTALL: KAP, oh my zsh, editorconfig"
+if [ -d "$HOME/.oh-my-zsh/themes" ]; then
+  cp themes/* "$HOME/.oh-my-zsh/themes/"
+fi
+
+sudo chsh -s "$(which zsh)" "$(whoami)"

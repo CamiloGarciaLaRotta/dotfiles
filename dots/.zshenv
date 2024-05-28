@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="af-magic"
+ZSH_THEME="camilo"
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS=true
@@ -21,7 +21,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+# plugins=(git)
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 source $ZSH/oh-my-zsh.sh
@@ -38,21 +38,16 @@ source $ZSH/oh-my-zsh.sh
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export GOPATH=$HOME/go
-# export GOROOT=/usr/local/bin/go
 export PATH=$GOPATH/bin:$PATH
-# export PATH=$GOROOT/bin:$PATH
-# export GO111MODULE=auto
 
-export CC=/usr/bin/gcc
-export CXX=/usr/bin/g++
 export PATH=~/.npm-global/bin:$PATH
 
 #### ALIAS
 alias rg='rg -p -i --hidden'
 alias cat='bat'
-alias ls='exa'
-alias ll='exa -l'
-alias la='exa -la'
+alias ls='eza'
+alias ll='eza -l'
+alias la='eza -la'
 alias gl="git log --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an>%Creset' --abbrev-commit $@"
 alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) %C(yellow)%d%C(reset) - %C(green)(%ar)%C(reset) %C()%s%C(reset) %C(blue)- %an%C(reset)' --all"
 alias gs="git status"
@@ -73,37 +68,10 @@ alias tk="tmux kill-server"
 alias ta="tmux a -t "
 alias tn="tmux new -t "
 alias td="tmux detach"
-alias tt="bin/rails test "
-alias TT="TEST_ALL_FEATURES=1 bin/rails test "
-alias tc="bin/rails test_changes"
-
-alias cs="gh cs"
-alias csc="gh cs create"
-alias csd="gh cs delete"
-alias csl="gh cs list"
-alias css="gh cs ssh"
-alias csp="gh cs ports"
-alias cspp="gh cs ports visibility 80:public"
-alias csdots="gh cs create --repo camilogarcialarotta/dotfiles --branch master --machine standardLinux32gb"
-alias csa="gh cs create --repo github/authzd --branch master --machine xLargePremiumLinux"
-alias csg="gh cs create --repo github/github --branch master --machine xLargePremiumLinux"
 
 alias ctags='/usr/local/bin/ctags'
 
 alias v='vim'
-alias b='script/bootstrap --local'
-alias s='GH_SSL=1 ENABLE_EMAIL_PREVIEWS=1 script/server'
-alias bs='b && s'
-alias dbd='script/setup --dotcom'
-alias dbe='script/setup --enterprise'
-alias dbs='bin/toggle-feature-flag enable custom_roles && bin/toggle-feature-flag enable repo_access_management && s'
-
-alias z='zed --insecure'
-alias zsr='z schema read'
-alias zp='z permission'
-alias zr='z relationship'
-
-alias inflate='ruby -r zlib -e "STDOUT.write Zlib::Inflate.inflate(STDIN.read)"'
 
 # vim fzf
 export EDITOR=vim
@@ -114,9 +82,6 @@ export FZF_TMUX=1
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
 
-# eval "$(rbenv init -)"
-# source ~/.github-api-token
-
 function check_last_exit_code() {
   local LAST_EXIT_CODE=$?
   if [[ $LAST_EXIT_CODE -ne 0 ]]; then
@@ -124,44 +89,21 @@ function check_last_exit_code() {
   fi
 }
 
+# TODO: persist the theme (see robbyrussel.zsh-theme
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[white]%} ✗%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 # %~ is the current working directory relative to the home directory
-RPROMPT=''
-PROMPT='$(check_last_exit_code)'
-PROMPT+='$FG[228]%1~ %{$reset_color%}'
-PROMPT+='$(git_prompt_info)'
+# RPROMPT=''
+# RPROMPT='$(check_last_exit_code)'
+# PROMPT+='$FG[228]%1~ %{$reset_color%}'
+# PROMPT+='$(git_prompt_info)'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-# cd ~/git/github
-
 export GPG_TTY=$TTY
-
 export PATH=/usr/local/bin:$PATH
 # export PATH="$HOME/.rbenv/bin:$PATH"
 # eval "$(rbenv init - zsh)"
-
-function delete_ghae() {
-  group_name="$1"
-  echo "Marking resource group $group_name for deletion."
-  az tag update --resource-id "$group_name" --operation merge --tags "auto_cleanup_date_utc='01/01/21@00:00:00'" || true
-}
-
-function delete_all_ghae() {
-  subscription=${1:-"GHAE Dev 4"}
-  for i in $(az group list --subscription "$subscription" --query "[?tags.owner=='camilogarcialarotta'].id" -otsv); do
-    echo $i
-    delete_ghae $i
-   done
-}
-
-function list_ghae() {
-  subscription=${1:-"GHAE Dev 4"}
-  az group list --subscription "$subscription" --query "[?tags.owner=='camilogarcialarotta'].name"
-}
-unset GITHUB_TOKEN

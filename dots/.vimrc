@@ -129,8 +129,8 @@ inoreabbrev lod ಠ_ಠ
 inoreabbrev sadface ʘ︵ʘ
 
 inoreabbrev tdate <c-r>=strftime("%d-%m-%Y")<cr>
-inoreabbrev @@ camilogarcialarotta@github.com
-inoreabbrev hato Co-authored-by: foo <foo@github.com>
+inoreabbrev @@ camilo.garcialarotta@shopify.com
+inoreabbrev hato Co-authored-by: foo <foo@shopify.com>
 
 inoreabbrev lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.<cr>
 " }}}

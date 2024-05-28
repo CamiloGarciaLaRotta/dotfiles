@@ -1,0 +1,14 @@
+[user]
+	name = Camilo Garcia La Rotta
+[core]
+  editor = vim
+[github]
+	user = CamiloGarciaLaRotta
+[pager]
+	branch = false
+[color]
+  ui = auto
+[log]
+	date = iso-local
+[blame]
+	date = iso-local
