@@ -107,3 +107,6 @@ export GPG_TTY=$TTY
 export PATH=/usr/local/bin:$PATH
 # export PATH="$HOME/.rbenv/bin:$PATH"
 # eval "$(rbenv init - zsh)"
+
+# rails dip (did it pass): run failed CI jobs in the terminal
+export BUILDKITE_TOKEN="$(cat /etc/spin/secrets/buildkite)"
