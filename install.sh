@@ -51,7 +51,7 @@ find ./dots -maxdepth 1 -mindepth 1 -exec sh -c 'cp "$1" ~' sh {} \;
   # sudo apt install gh
 # else
 setup_brew
-brew_get "bat"
+# brew_get "bat"
 brew_get "eza"
 brew_get "ripgrep"
 brew_get "shellcheck"

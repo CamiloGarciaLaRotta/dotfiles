@@ -35,7 +35,7 @@ source $ZSH/oh-my-zsh.sh
 
 #### EXPORTS
 # pretty man
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
@@ -44,7 +44,7 @@ export PATH=~/.npm-global/bin:$PATH
 
 #### ALIAS
 alias rg='rg -p -i --hidden'
-alias cat='bat'
+# alias cat='bat'
 alias ls='eza'
 alias ll='eza -l'
 alias la='eza -la'
