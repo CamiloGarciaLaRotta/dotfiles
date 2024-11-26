@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="camilo"
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS=true
@@ -35,7 +35,7 @@ source $ZSH/oh-my-zsh.sh
 
 #### EXPORTS
 # pretty man
-# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
@@ -44,7 +44,7 @@ export PATH=~/.npm-global/bin:$PATH
 
 #### ALIAS
 alias rg='rg -p -i --hidden'
-# alias cat='bat'
+alias cat='bat'
 alias ls='eza'
 alias ll='eza -l'
 alias la='eza -la'
@@ -68,6 +68,24 @@ alias tk="tmux kill-server"
 alias ta="tmux a -t "
 alias tn="tmux new -t "
 alias td="tmux detach"
+
+alias dup="gmm && gpl && dev up"
+alias dclean="dev style && dev typecheck"
+alias dcd="dev cd"
+alias cdcore="dev cd shopify"
+alias cdshop="dev cd shop-server"
+alias cdjs="dev cd shop-js"
+alias cddocs="dev cd shop-docs"
+alias sup="spin up shop-server:pay-identity --memory 1080 --wait -n"
+alias sl="spin list"
+alias devtype="bin/tapioca dsl && bin/tapioca gem"
+
+alias gtco="gt co"
+alias gtc="gt create --all"
+alias gtl="gt log short"
+alias gtl2="gt log"
+alias gtps="gt submit --stack --cli"
+alias gtpl="gt sync"
 
 alias ctags='/usr/local/bin/ctags'
 
@@ -107,6 +125,3 @@ export GPG_TTY=$TTY
 export PATH=/usr/local/bin:$PATH
 # export PATH="$HOME/.rbenv/bin:$PATH"
 # eval "$(rbenv init - zsh)"
-
-# rails dip (did it pass): run failed CI jobs in the terminal
-export BUILDKITE_TOKEN="$(cat /etc/spin/secrets/buildkite)"
