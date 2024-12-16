@@ -78,7 +78,16 @@ alias cdjs="dev cd shop-js"
 alias cddocs="dev cd shop-docs"
 alias sup="spin up shop-server:pay-identity --memory 1080 --wait -n"
 alias sl="spin list"
-alias devtype="bin/tapioca dsl && bin/tapioca gem"
+alias dtype="bin/tapioca dsl && bin/tapioca gem"
+alias dlog="journalctl --follow | rg \"CCC =>\""
+
+dflagon() {
+  bin/rails g verdict:configure_flag "$@" --percent 100
+}
+
+dflagoff() {
+  bin/rails g verdict:configure_flag "$@" --percent 0
+}
 
 alias gtco="gt co"
 alias gtc="gt create --all"
@@ -99,6 +108,7 @@ export FZF_TMUX=1
 # Install Ruby Gems to ~/gems
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
+# export PATH="/opt/homebrew/bin/python3":$PATH
 
 function check_last_exit_code() {
   local LAST_EXIT_CODE=$?

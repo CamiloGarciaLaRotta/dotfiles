@@ -58,6 +58,8 @@ brew_get "shellcheck"
 brew_get "tmux"
 brew_get "zsh"
 brew-get "zsh-autosuggestions"
+brew-get "withgraphite/tap/graphite"
+
 
 npm install -g @withgraphite/graphite-cli@stable
 # fi
